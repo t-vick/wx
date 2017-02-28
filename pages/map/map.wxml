@@ -1,0 +1,4 @@
+<!--pages/map/map.wxml-->
+<!--<view class="container">-->
+<canvas class="smst-map" canvas-id="myCanvas" />
+<!--</view>-->

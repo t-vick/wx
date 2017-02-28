@@ -1,0 +1,9 @@
+/* pages/map/map.wxss */
+page {
+    height:100%;
+    overflow-y: hidden;
+}
+.smst-map {
+    width:750rpx;
+    height:100%;
+}
