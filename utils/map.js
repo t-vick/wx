@@ -25,7 +25,6 @@ class Map {
     }
 
     drawPillars(pillarList) {
-        // this.ctx.beginPath();
         this.ctx.setFillStyle('black');
         for (let pillar of pillarList) {
             this.ctx.fillRect(pillar.x,pillar.y,pillar.width,pillar.height);
@@ -35,12 +34,14 @@ class Map {
 
     drawPaths (pathList) {
         this.ctx.setStrokeStyle('blue');
+        // this.ctx.beginPath();
         for (let path of pathList) {
             this.ctx.setLineWidth(path.width);
             this.ctx.moveTo(path.startX, path.startY);
             this.ctx.lineTo(path.endX, path.endY);
-            this.ctx.stroke();
+            // this.ctx.stroke();//这句代码不能放在这里，否则线条的透明不不一致，
         }
+        this.ctx.stroke();//放在这里才能保证画出的线条的透明度一致
     }
 
     translate(x, y) {
