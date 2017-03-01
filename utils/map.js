@@ -4,11 +4,17 @@ class Map {
         this.ctx.setLineCap('round');
         this.ctx.setLineJoin('round');
         this.ctx.setGlobalAlpha(0.2);
+    }
+
+    setOption(option) {
         let _this = this;
         wx.getSystemInfo({
             success: function(data) {
                 _this.ctx.setFillStyle('yellow');
-                _this.ctx.fillRect(0,0,data.windowWidth,data.windowHeight);
+                _this.ctx.fillRect(-option.xLoc,-option.yLoc,data.windowWidth,data.windowHeight);
+                _this.drawPillars(option.pillarList);
+                _this.drawPaths(option.pathList);
+                _this.ctx.draw();
             },
             fail: function(err) {
                 console.log(err);
@@ -37,10 +43,8 @@ class Map {
         }
     }
 
-    setOption(option) {
-        this.drawPillars(option.pillarList);
-        this.drawPaths(option.pathList);
-        this.ctx.draw();
+    translate(x, y) {
+        this.ctx.translate(x, y);
     }
 }
 

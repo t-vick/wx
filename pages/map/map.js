@@ -3,10 +3,12 @@
 import Map from '../../utils/map.js';
 Page({
   data:{
-    x:0,
-    y:0,
+    x: 0,
+    y: 0,
     map: null,
     option: {
+      xLoc: 0,
+      yLoc: 0,
       pillarList: [
       {
         x: 150,
@@ -23,18 +25,32 @@ Page({
     ],
       pathList: [
       {
-        startX: 10,
-        endX: 50,
+        startX: -10,
+        endX: 400,
         startY: 250,
-        endY: 300,
-        width: 10
+        endY: 250,
+        width: 30
       },
        {
-        startX: 50,
-        endX: 100,
-        startY: 300,
-        endY: 300,
-        width: 5
+        startX: -10,
+        endX: 400,
+        startY: 400,
+        endY: 400,
+        width: 30
+      },
+       {
+        startX: 30,
+        endX: 30,
+        startY: -10,
+        endY: 800,
+        width: 30
+      },
+       {
+        startX: 330,
+        endX: 330,
+        startY: -10,
+        endY: 800,
+        width: 30
       }
     ]
     }
@@ -44,47 +60,6 @@ Page({
     // const ctx = wx.createCanvasContext('myCanvas');
     // const ctx = map.init('myCanvas');
     this.data.map = new Map('myCanvas');
-    // map.ctx.setFillStyle('red');
-    // map.ctx.fillRect(10,10,150,75);
-    // map.ctx.draw();
-    // let pillarList = [
-    //   {
-    //     x: 150,
-    //     y: 150,
-    //     width: 10,
-    //     height: 10
-    //   },
-    //   {
-    //     x: 150,
-    //     y: 200,
-    //     width: 10,
-    //     height: 10
-    //   }
-    // ];
-
-    // map.drawPillars(pillarList);
-
-    // let pathList = [
-    //   {
-    //     startX: 10,
-    //     endX: 50,
-    //     startY: 250,
-    //     endY: 300,
-    //     width: 10
-    //   },
-    //    {
-    //     startX: 50,
-    //     endX: 100,
-    //     startY: 300,
-    //     endY: 300,
-    //     width: 5
-    //   }
-    // ];
-    // map.drawPaths(pathList);
-    // let option = {
-    //   pillarList: pillarList,
-    //   pathList: pathList
-    // };
 
     this.data.map.setOption(this.data.option);
   },
@@ -114,19 +89,10 @@ Page({
       y: e.touches[0].y
     })
 
-    console.log(`x:${this.data.x}----y:${this.data.y}`);
-    console.log(`x:${xOffset}----y:${yOffset}`);
-    for (let pillar of this.data.option.pillarList) {
-      pillar.x += xOffset;
-      pillar.y += yOffset;
-    }
+    this.data.option.xLoc = this.data.option.xLoc + xOffset;
+    this.data.option.yLoc = this.data.option.yLoc + yOffset;
 
-    for (let path of this.data.option.pathList) {
-      path.startX += xOffset;
-      path.endX += xOffset;
-      path.startY += yOffset;
-      path.endY += yOffset;
-    }
+    this.data.map.translate(this.data.option.xLoc, this.data.option.yLoc);
     this.data.map.setOption(this.data.option);
   }
 })
