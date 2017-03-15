@@ -8,7 +8,7 @@ class Map {
 
     setOption(option) {
         let _this = this;
-        wx.getSystemInfo({
+        wx.getSystemInfo({//先获取到设备信息，确认渲染区域
             success: function(data) {
                 _this.ctx.setFillStyle('yellow');
                 _this.ctx.fillRect(-option.xLoc,-option.yLoc,data.windowWidth,data.windowHeight);
